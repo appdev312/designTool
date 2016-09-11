@@ -1,0 +1,17 @@
+.color-option-pane {
+	.choose-color-panel {
+		height: 210px;
+		
+		a.color-thumbnail {
+			float: left;
+			margin: 5px;
+			width: 40px;
+			height: 40px;
+			border: solid 1px #000;
+		}
+
+		a.selected {
+			border: 2px solid #f00 !important;
+		}
+	}
+}
