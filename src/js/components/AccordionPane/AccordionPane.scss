@@ -21,6 +21,13 @@
 		}
 	}
 
+	.panel-group {
+		.panel-body {
+			max-height: 200px;
+			overflow-y: scroll;
+		}
+	}
+
 	ol {
 		list-style-type: none !important;
 	    margin: 0;
