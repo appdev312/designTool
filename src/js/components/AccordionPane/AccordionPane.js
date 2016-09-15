@@ -11,6 +11,8 @@ export default class AccordionPane extends Component {
 
   static propTypes = {
     title: PropTypes.string.isRequired,
+    selectedCategory: PropTypes.string.isRequired,
+    selectedThumbnail: PropTypes.object.isRequired,
     thumbsData: PropTypes.array.isRequired,
     onClickThumbnail: PropTypes.func
   };
@@ -19,18 +21,36 @@ export default class AccordionPane extends Component {
     super(props);
 
     this.state = {
-      selectedCategory: "",
-      selectedThumbnail: {}
+      selectedCategory: props.selectedCategory,
+      selectedThumbnail: props.selectedThumbnail
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      selectedCategory: nextProps.selectedCategory,
+      selectedThumbnail: nextProps.selectedThumbnail
+    });
   }
 
   onSelectCategory(e) {
     this.setState({ selectedCategory: e });
+  }
 
-    // Manually check if the thumbnails are viewable, perform lazy-loading
-    setTimeout(function() { 
-      forceCheck();
-    }, 500);
+  // Manually check if the thumbnails are viewable, perform lazy-loading
+  onEntered(e) {
+    forceCheck();
+  }
+
+  componentDidMount() {
+    // When scrolling inside each panel, we have to force check (lazy load)
+    this._panelElems = document.querySelectorAll('div.panel-group .panel-body');
+
+    if (this._panelElems && this._panelElems.length > 0) {
+      this._panelElems.forEach((_elem) => {
+        _elem.addEventListener('scroll', this.onEntered.bind(this));
+      })
+    }
   }
 
   onClickThumbnail(thumb) {
@@ -60,16 +80,23 @@ export default class AccordionPane extends Component {
   }
 
   render () {
-    let { title, thumbsData } = this.props;
+    let { title, thumbsData, selectedCategory } = this.props;
 
     return (
       <div className="accordion-pane">
         <Panel header={title} bsStyle="info">
-          <Accordion onSelect={this.onSelectCategory.bind(this)}>
+          <Accordion onSelect={this.onSelectCategory.bind(this)} defaultActiveKey={selectedCategory}>
             {
               thumbsData.map((panelData) => 
                 (
-                  <Panel header={panelData.category} eventKey={panelData.category} key={panelData.category} bsStyle="info">
+                  <Panel 
+                    header={panelData.category} 
+                    eventKey={panelData.category} 
+                    key={panelData.category} 
+                    bsStyle="info" 
+                    onEntered={this.onEntered.bind(this)}
+                    ref={panelData.category} 
+                  >
                     <ol>
                       {this.render_thumbnails(panelData.thumbnails)}
                     </ol>

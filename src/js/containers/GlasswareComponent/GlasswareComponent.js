@@ -77,6 +77,8 @@ class GlasswareComponent extends Component {
                     title="Design Browser (Step 1 of 4)"
                     thumbsData={apiData.graphic.entries}
                     onClickThumbnail={this.props.selectThumbnail}
+                    selectedCategory={glassware.selectedCategory}
+                    selectedThumbnail={glassware.selectedThumbnail}
                   />
                 }
                 {

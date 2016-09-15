@@ -6,7 +6,7 @@ import each from 'lodash/each';
 const initialState = {
 	topButton: 'Design',
 	selectedCategory: '',
-	selectedThumbnail: '',
+	selectedThumbnail: {},
 	selectedColor: 'rgb(0,0,0)',
 	selectedFont: '',
 	enteredText: ['', '', '', '']
