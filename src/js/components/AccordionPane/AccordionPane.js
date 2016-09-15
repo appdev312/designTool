@@ -3,6 +3,9 @@ import './AccordionPane.scss';
 import React, { Component, PropTypes } from 'react';
 import { Accordion, Panel, Thumbnail } from 'react-bootstrap';
 import classnames from 'classnames';
+import LazyLoad from 'react-lazyload';
+import { forceCheck } from 'react-lazyload';
+import AccordionPlaceHolder from './AccordionPlaceHolder.js';
 
 export default class AccordionPane extends Component {
 
@@ -23,28 +26,35 @@ export default class AccordionPane extends Component {
 
   onSelectCategory(e) {
     this.setState({ selectedCategory: e });
+
+    // Manually check if the thumbnails are viewable, perform lazy-loading
+    setTimeout(function() { 
+      forceCheck();
+    }, 500);
   }
 
   onClickThumbnail(thumb) {
     this.setState({ selectedThumbnail: thumb });
 
     if (this.props.onClickThumbnail) {
-      this.props.onClickThumbnail( this.state.selectedCategory, this.state.selectedThumbnail );
+      this.props.onClickThumbnail( this.state.selectedCategory, thumb );
     }
   }
 
   render_thumbnails(thumbs) {
     return thumbs.map((thumb) =>
       (
-        <li key={thumb.name}>
-          <Thumbnail 
-            href="#" 
-            className={classnames('design-thumbnail', { 'selected': this.state.selectedThumbnail === thumb })}
-            alt="No Image" 
-            src={thumb.url} 
-            onClick={this.onClickThumbnail.bind(this, thumb)}
-          />
-        </li>
+        <LazyLoad key={thumb.id} once height={70} offset={[-5, 0]} placeholder={<AccordionPlaceHolder />}>
+          <li>
+            <Thumbnail 
+              href="#" 
+              className={classnames('design-thumbnail', { 'selected': this.state.selectedThumbnail === thumb })}
+              alt="No Image" 
+              src={thumb.url} 
+              onClick={this.onClickThumbnail.bind(this, thumb)}
+            />
+          </li>
+        </LazyLoad>
       )
     );
   }
