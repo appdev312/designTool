@@ -45,7 +45,8 @@ function formatGraphicData(response) {
 		cats[val.graphicCategory].push({
 			id: index,
 			name: val.graphicName,
-			url: val.graphicThumbPath
+			url: val.graphicThumbPath,
+			graphicFullPath: val.graphicFullPath
 		});
 		index = index + 1;
 	});
@@ -69,11 +70,11 @@ export default function apiData(state = initialState, action) {
 				}
 			});
 		case actionTypes.COLOR_ENTRY_SUCCESS: 
-			return merge({}, state, {
+		return merge({}, state, {
 				color: {
 					...state.color,
 					isFetching: false,
-					entries: map(response, (cl)=>cl.colorRGB)
+					entries: map(response, (cl)=>({colorName: cl.colorName, colorRGB: cl.colorRGB}))
 				}
 			});
 		case actionTypes.COLOR_ENTRY_FAILURE: 

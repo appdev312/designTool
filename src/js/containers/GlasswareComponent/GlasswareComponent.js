@@ -4,8 +4,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
-
-import { TopMenu, ProductHolder, AccordionPane, ColorOptionPane, TextOptionPane } from '../../components';
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
+import { TopMenu, GlasswareCanvasComponent, AccordionPane, ColorOptionPane, TextOptionPane } from '../../components';
 import { graphicEntryActions, colorEntryActions, fontEntryActions, glasswareActions } from '../../actions';
 
 class GlasswareComponent extends Component {
@@ -13,7 +13,6 @@ class GlasswareComponent extends Component {
   static propTypes = {
     apiData: PropTypes.object.isRequired,
     glassware: PropTypes.object.isRequired,
-
     loadGraphicEntries: PropTypes.func.isRequired,
     loadColorEntries: PropTypes.func.isRequired,
     loadFontEntries: PropTypes.func.isRequired,
@@ -21,7 +20,12 @@ class GlasswareComponent extends Component {
     selectColor: PropTypes.func.isRequired,
     selectThumbnail: PropTypes.func.isRequired,
     selectFont: PropTypes.func.isRequired,
-    changeText: PropTypes.func.isRequired
+    changeText: PropTypes.func.isRequired,
+
+    canUndo: PropTypes.bool.isRequired,
+    canRedo: PropTypes.bool.isRequired,
+    onUndo: PropTypes.func.isRequired,
+    onRedo: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -52,31 +56,40 @@ class GlasswareComponent extends Component {
   }
 
   render () {
-    const { topMenu, topMenuActions, apiData, glassware } = this.props;
+    const { topMenu, topMenuActions, apiData, glassware, canUndo, canRedo } = this.props;
     let isFetching = apiData.graphic.isFetching || apiData.color.isFetching || apiData.font.isFetching;
 
     return (
       <div className = "wrapper">
         {/* Top Menu with buttons */}
         <TopMenu
-          buttonList={['Design', 'Color', 'Text', 'Add Ons']}
-          selected='Design'
-          topMenuOptions={{layout: 'A', backgroundColor: '', borderColor: ''}}
-          onGoBack={()=>{}}
-          onGoForward={()=>{}}
+          buttonList={glassware.buttonList}
+          selected={glassware.topButton}
+          topMenuOptions={{
+            layout: 'A', 
+            backgroundColor: glassware.selectedColor.colorName ? glassware.selectedColor.colorName:'', 
+            borderColor: '',
+            design: glassware.selectedThumbnail.name,
+            canUndo: canUndo,
+            canRedo: canRedo
+          }}
+          onGoBack={()=>this.props.onUndo}
+          onGoForward={()=>this.props.onRedo}
           onClickButton={this.props.selTopButton}
         />
         {isFetching && this.loadingBar()}
         {!isFetching &&
           <div className="content-wrapper">
             <Row>
-              <Col xs={5} md={5}>
+              <Col xs={12} sm={6} md={5}>
                 {/* Left panel with options */}
                 {
                   glassware.topButton === 'Design' && <AccordionPane
                     title="Design Browser (Step 1 of 4)"
                     thumbsData={apiData.graphic.entries}
                     onClickThumbnail={this.props.selectThumbnail}
+                    selectedCategory={glassware.selectedCategory}
+                    selectedThumbnail={glassware.selectedThumbnail}
                   />
                 }
                 {
@@ -99,9 +112,9 @@ class GlasswareComponent extends Component {
                   />
                 }
               </Col>
-              <Col xs={7} md={7}>
+              <Col xs={12} sm={6} md={7}>
                 {/* Drawing canvas */}
-                <ProductHolder />
+                <GlasswareCanvasComponent />
               </Col>
             </Row>
           </div>
@@ -114,7 +127,10 @@ class GlasswareComponent extends Component {
 function mapStateToProps(state) {
   return {
     apiData: state.apiData,
-    glassware: state.glassware
+    glassware: state.glassware.present,
+
+    canUndo: state.glassware.past.length > 0,
+    canRedo: state.glassware.future.length > 0
   };
 }
 
@@ -128,7 +144,10 @@ function mapDispatchToProps(dispatch) {
     selectColor: bindActionCreators(glasswareActions.selectColor, dispatch),
     selectThumbnail: bindActionCreators(glasswareActions.selectThumbnail, dispatch),
     selectFont: bindActionCreators(glasswareActions.selectFont, dispatch),
-    changeText: bindActionCreators(glasswareActions.changeText, dispatch)
+    changeText: bindActionCreators(glasswareActions.changeText, dispatch),
+
+    onUndo: bindActionCreators(UndoActionCreators.undo, dispatch),
+    onRedo: bindActionCreators(UndoActionCreators.redo, dispatch)
   };
 }
 

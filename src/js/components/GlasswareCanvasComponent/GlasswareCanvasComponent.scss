@@ -1,0 +1,88 @@
+.product-container {
+	background-image: url('images/grid-pattern.png');
+    border: 1px solid #ccc;
+    position: relative;
+    border-radius: 6px;
+    height: 100%;
+
+    .visible-area {
+    	margin: 20px auto 20px auto;
+
+	    .canvas-wrapper {
+	    	position: relative;
+			padding: 20px;
+			border: dashed 1px #f00;
+			background-color: #fff;
+			border-radius: 12px;
+			box-sizing: border-box;
+
+			.background-layer {
+				position: absolute;
+				left: 20px;
+				top: 20px;
+				
+				img{
+					border: 1px solid #000;
+					-webkit-border-radius: 10px !important;
+					-moz-border-radius: 10px !important;
+					border-radius: 10px !important;
+				}
+			}
+
+			.craft-layer {
+				position: relative;
+				left: 0px;
+				top: 0px;
+				text-align: center;
+				vertical-align: middle;
+				padding: 0px;
+
+				img#clipart {
+					position: absolute;
+					left: 112px;
+					top: 130px;
+					width: 125px;
+					height: 125px;
+				}
+
+				p {
+					width: 100%;
+					font-size: 13px;
+					position: absolute;
+				}
+
+				#text-line1 {
+					top: 264px;
+				}
+
+				#text-line2 {
+					top: 284px;
+				}
+
+				#text-line3 {
+					top: 304px;
+				}
+			}
+	    }
+
+	    .button-wrapper {
+	    	margin-top: 10px;
+
+	    	.prev-button {
+	    		float: left;
+	    	}
+
+	    	.next-button {
+	    		float: right;
+	    	}
+	    }
+
+		.button-wrapper:after {
+			content: " ";
+			visibility: hidden;
+			display: block;
+			height: 0;
+			clear: both;
+		}
+	}
+}

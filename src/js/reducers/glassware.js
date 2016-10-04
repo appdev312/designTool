@@ -2,17 +2,19 @@ import * as actionTypes from '../constants/actionTypes';
 import merge from 'lodash/merge';
 import map from 'lodash/map';
 import each from 'lodash/each';
+import undoable, { distinctState } from 'redux-undo'
 
 const initialState = {
+	buttonList: ['Design', 'Color', 'Text', 'Add Ons'],
 	topButton: 'Design',
 	selectedCategory: '',
-	selectedThumbnail: '',
-	selectedColor: 'rgb(0,0,0)',
+	selectedThumbnail: {},
+	selectedColor: {},
 	selectedFont: '',
 	enteredText: ['', '', '', '']
 };
 
-export default function glassware(state = initialState, action) {
+function glassware(state = initialState, action) {
 	if (action.itemType !== 'glassware') {
 		return state;
 	}
@@ -56,3 +58,9 @@ export default function glassware(state = initialState, action) {
 			return state;
 	}
 }
+
+const undoableGlassware = undoable(glassware, {
+  filter: distinctState()
+})
+
+export default undoableGlassware

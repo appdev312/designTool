@@ -22,6 +22,12 @@ export default class TopMenu extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      selected: nextProps.selected
+    });
+  }
+
   onClickButton(bt) {
     this.setState({ selected: bt });
 
@@ -47,7 +53,7 @@ export default class TopMenu extends Component {
   }
 
   render () {
-    let { topMenuOptions, onGoBack, onGoForward } = this.props;
+    let { topMenuOptions } = this.props;
 
     return (
       <div className = "topmenu bg-info">
@@ -79,10 +85,10 @@ export default class TopMenu extends Component {
           </Col>
           <Col xs={2} md={2}>
             <div className = "pull-right">
-              <Button bsStyle="default" bsSize="xsmall" onClick={onGoBack()}>
+              <Button bsStyle="default" bsSize="xsmall" onClick={this.props.onGoBack()} disabled={!topMenuOptions.canUndo}>
                 <Glyphicon glyph="chevron-left" />
               </Button>
-              <Button bsStyle="default" bsSize="xsmall" onClick={onGoForward()}>
+              <Button bsStyle="default" bsSize="xsmall" onClick={this.props.onGoForward()} disabled={!topMenuOptions.canRedo}>
                 <Glyphicon glyph="chevron-right" />
               </Button>
             </div>

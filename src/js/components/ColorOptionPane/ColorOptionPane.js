@@ -9,7 +9,7 @@ export default class ColorOptionPane extends Component {
   static propTypes = {
     title: PropTypes.string,
     colorList: PropTypes.array.isRequired, 
-    selected: PropTypes.string.isRequired,
+    selected: PropTypes.object,
     onChooseColor: PropTypes.func
   };
 
@@ -17,7 +17,7 @@ export default class ColorOptionPane extends Component {
     super(props, context);
 
     this.state = {
-      selected: props.selected
+      selected: props.selected ? props.selected : props.colorList[0]
     };
   }
 
@@ -34,9 +34,9 @@ export default class ColorOptionPane extends Component {
       (
         <a 
           href="#"
-          className={classnames('color-thumbnail', { 'selected': this.state.selected === cl })}
-          key={cl}
-          style={{ backgroundColor: cl }}
+          className={classnames('color-thumbnail', { 'selected': this.state.selected.colorName === cl.colorName })}
+          key={cl.colorRGB}
+          style={{ backgroundColor: cl.colorRGB }}
           onClick={this.onClickColor.bind(this, cl)}
         />
       )

@@ -14,12 +14,14 @@ const PATHS = {
 };
 
 const plugins = [
+/*
   new CopyWebpackPlugin([
     {
       from: PATHS.images,
       to: 'images'
     }
   ]),
+*/
   // Shared code
   new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
   // Avoid publishing files when compilation fails
