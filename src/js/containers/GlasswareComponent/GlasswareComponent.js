@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
-import { TopMenu, GlasswareCanvasComponent, AccordionPane, ColorOptionPane, TextOptionPane } from '../../components';
+import { TopMenu, GlasswareCanvasComponent, AccordionPane, ColorOptionPane, TextOptionPane, QuantitySubmitter } from '../../components';
 import { graphicEntryActions, colorEntryActions, fontEntryActions, glasswareActions } from '../../actions';
 
 class GlasswareComponent extends Component {
@@ -33,7 +33,8 @@ class GlasswareComponent extends Component {
 
     this.state = {
       queryParam: this.props.location.query,
-      colorList: []
+      colorList: [],
+      windowWidth: window.innerWidth
     };
 
     // Load layout data for Glassware
@@ -42,7 +43,16 @@ class GlasswareComponent extends Component {
     this.props.loadFontEntries('glassware');
   }
 
-  componentWillReceiveProps() {
+  handleResize(e) {
+    this.setState({windowWidth: window.innerWidth});
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.handleResize.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize.bind(this));
   }
 
   loadingBar() {
@@ -77,6 +87,7 @@ class GlasswareComponent extends Component {
           onGoForward={()=>this.props.onRedo}
           onClickButton={this.props.selTopButton}
         />
+        {/* Main content */}
         {isFetching && this.loadingBar()}
         {!isFetching &&
           <div className="content-wrapper">
