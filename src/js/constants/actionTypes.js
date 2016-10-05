@@ -1,3 +1,5 @@
+export const MOBILE_LIMIT = 700;
+
 /*
  * API Calls
  */

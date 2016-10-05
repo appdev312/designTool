@@ -125,7 +125,7 @@ class GlasswareComponent extends Component {
               </Col>
               <Col xs={12} sm={6} md={7}>
                 {/* Drawing canvas */}
-                <GlasswareCanvasComponent />
+                <GlasswareCanvasComponent windowWidth={this.state.windowWidth} />
               </Col>
             </Row>
           </div>

@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button, Row, Col } from 'react-bootstrap';
 import { glasswareActions } from '../../actions';
+import { MOBILE_LIMIT } from '../../constants/actionTypes';
 
 class GlasswareCanvasComponent extends Component {
 
   static propTypes = {
     glassware: PropTypes.object.isRequired,
-    selTopButton: PropTypes.func.isRequired
+    selTopButton: PropTypes.func.isRequired,
+    windowWidth: PropTypes.number
   };
 
   constructor(props) {
@@ -18,14 +20,16 @@ class GlasswareCanvasComponent extends Component {
 
     this.state = {
       prevEnabled: props.glassware.buttonList.indexOf(props.glassware.topButton) === 0, 
-      fwdEnabled: props.glassware.buttonList.indexOf(props.glassware.topButton) === props.glassware.buttonList.length - 1
+      fwdEnabled: props.glassware.buttonList.indexOf(props.glassware.topButton) === props.glassware.buttonList.length - 1,
+      windowWidth: props.windowWidth
     };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       prevEnabled: nextProps.glassware.buttonList.indexOf(nextProps.glassware.topButton) === 0,
-      fwdEnabled: nextProps.glassware.buttonList.indexOf(nextProps.glassware.topButton) === nextProps.glassware.buttonList.length - 1
+      fwdEnabled: nextProps.glassware.buttonList.indexOf(nextProps.glassware.topButton) === nextProps.glassware.buttonList.length - 1,
+      windowWidth: nextProps.windowWidth
     });
   }
 
@@ -63,6 +67,15 @@ class GlasswareCanvasComponent extends Component {
     return (
       <div className="product-container">
         <div className="visible-area" style={{width: '392px'}}>
+          {
+            this.state.windowWidth < MOBILE_LIMIT &&
+            <div className="button-wrapper">
+              <Button bsStyle="default" bsSize="small" className="prev-button" 
+                disabled={this.state.prevEnabled} onClick={this.onClickPrevButton.bind(this)}>Prev</Button>
+              <Button bsStyle="default" bsSize="small" className="next-button" 
+                disabled={this.state.fwdEnabled} onClick={this.onClickFwdButton.bind(this)}>Next</Button>
+            </div>
+          }
           <div className="canvas-wrapper" style={{height: '542px'}}>
             <div className="background-layer">
               <img id="craft-background" src={backgroundImage} />
@@ -76,12 +89,15 @@ class GlasswareCanvasComponent extends Component {
               <p id="text-line3" style={{color: selectedColor.colorRGB, fontFamily: selectedFont}}>{enteredText[2]}</p>
             </div>
           </div>
-          <div className="button-wrapper">
-            <Button bsStyle="default" bsSize="small" className="prev-button" 
-              disabled={this.state.prevEnabled} onClick={this.onClickPrevButton.bind(this)}>Prev</Button>
-            <Button bsStyle="default" bsSize="small" className="next-button" 
-              disabled={this.state.fwdEnabled} onClick={this.onClickFwdButton.bind(this)}>Next</Button>
-          </div>
+          {
+            this.state.windowWidth >= MOBILE_LIMIT &&
+            <div className="button-wrapper">
+              <Button bsStyle="default" bsSize="small" className="prev-button" 
+                disabled={this.state.prevEnabled} onClick={this.onClickPrevButton.bind(this)}>Prev</Button>
+              <Button bsStyle="default" bsSize="small" className="next-button" 
+                disabled={this.state.fwdEnabled} onClick={this.onClickFwdButton.bind(this)}>Next</Button>
+            </div>
+          }
         </div>
       </div>
     );
