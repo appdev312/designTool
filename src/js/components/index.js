@@ -5,3 +5,5 @@ export { default as TextOptionPane } from './TextOptionPane/TextOptionPane';
 export { default as QuantitySubmitter } from './QuantitySubmitter/QuantitySubmitter';
 export { default as GlasswareCanvasComponent } from './GlasswareCanvasComponent/GlasswareCanvasComponent';
 export { default as NumberSpinner } from './NumberSpinner/NumberSpinner';
+export { default as CompFontOptionPane } from './CompFontOptionPane/CompFontOptionPane';
+export { default as CompTextOptionPane } from './CompTextOptionPane/CompTextOptionPane';

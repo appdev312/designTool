@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
-import { TopMenu, GlasswareCanvasComponent, AccordionPane, ColorOptionPane, TextOptionPane, QuantitySubmitter } from '../../components';
+import { TopMenu, GlasswareCanvasComponent, AccordionPane, ColorOptionPane, TextOptionPane, QuantitySubmitter, CompFontOptionPane, CompTextOptionPane } from '../../components';
 import { graphicEntryActions, colorEntryActions, fontEntryActions, glasswareActions } from '../../actions';
+import { MOBILE_LIMIT } from '../../constants/actionTypes';
 
 class GlasswareComponent extends Component {
   
@@ -92,37 +93,58 @@ class GlasswareComponent extends Component {
         {!isFetching &&
           <div className="content-wrapper">
             <Row>
-              <Col xs={12} sm={6} md={5}>
-                {/* Left panel with options */}
-                {
-                  glassware.topButton === 'Design' && <AccordionPane
-                    title="Design Browser (Step 1 of 4)"
-                    thumbsData={apiData.graphic.entries}
-                    onClickThumbnail={this.props.selectThumbnail}
-                    selectedCategory={glassware.selectedCategory}
-                    selectedThumbnail={glassware.selectedThumbnail}
-                  />
-                }
-                {
-                  glassware.topButton ==='Color' && <ColorOptionPane 
-                    title='Color Options (Step 2 of 4)'
-                    colorList={apiData.color.entries}
-                    selected={glassware.selectedColor}
-                    onChooseColor={this.props.selectColor}
-                  />
-                }
-                {
-                  glassware.topButton === 'Text' && <TextOptionPane
-                    title="Text Options (Step 3 of 4)"
+              { 
+                this.state.windowWidth >= MOBILE_LIMIT &&
+                <Col xs={12} sm={6} md={5}>
+                  {/* Left panel with options */}
+                  {
+                    glassware.topButton === 'Design' && <AccordionPane
+                      title="Design Browser (Step 1 of 4)"
+                      thumbsData={apiData.graphic.entries}
+                      onClickThumbnail={this.props.selectThumbnail}
+                      selectedCategory={glassware.selectedCategory}
+                      selectedThumbnail={glassware.selectedThumbnail}
+                    />
+                  }
+                  {
+                    glassware.topButton ==='Color' && <ColorOptionPane 
+                      title='Color Options (Step 2 of 4)'
+                      colorList={apiData.color.entries}
+                      selected={glassware.selectedColor}
+                      onChooseColor={this.props.selectColor}
+                    />
+                  }
+                  {
+                    glassware.topButton === 'Text' && <TextOptionPane
+                      title="Text Options (Step 3 of 4)"
+                      fontList={['Arial', 'Avenida', 'Black Cherry', 'Block']}
+                      selectedFont={glassware.selectedFont}
+                      lineCount={3}
+                      value={glassware.enteredText}
+                      onChooseFont={this.props.selectFont}
+                      onChangeText={this.props.changeText}
+                    />
+                  }
+                </Col>
+              }
+              { 
+                this.state.windowWidth < MOBILE_LIMIT &&
+                <Col xs={12} sm={6} md={5}>
+                  {/* Left panel with options for mobile view */}
+                  <CompFontOptionPane
+                    title="Font Options (Step 4 of 6)"
                     fontList={['Arial', 'Avenida', 'Black Cherry', 'Block']}
                     selectedFont={glassware.selectedFont}
+                    onChooseFont={this.props.selectFont}
+                  />
+                  <CompTextOptionPane
+                    title="Text Options (Step 3 of 6)"
                     lineCount={3}
                     value={glassware.enteredText}
-                    onChooseFont={this.props.selectFont}
                     onChangeText={this.props.changeText}
                   />
-                }
-              </Col>
+                </Col>
+              }
               <Col xs={12} sm={6} md={7}>
                 {/* Drawing canvas */}
                 <GlasswareCanvasComponent windowWidth={this.state.windowWidth} />
