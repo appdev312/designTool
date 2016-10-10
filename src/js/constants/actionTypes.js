@@ -1,6 +1,6 @@
 export const MOBILE_LIMIT = 700;
-export const BASE_PATH = '/designTool';
-// export const BASE_PATH = '';
+// export const BASE_PATH = '/designTool';
+export const BASE_PATH = '';
 
 /*
  * API Calls
