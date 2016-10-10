@@ -45,7 +45,7 @@ function formatGraphicData(response) {
 		cats[val.graphicCategory].push({
 			id: index,
 			name: val.graphicName,
-			url: val.graphicThumbPath,
+			url: actionTypes.BASE_PATH + "/" + val.graphicThumbPath,
 			graphicFullPath: val.graphicFullPath
 		});
 		index = index + 1;

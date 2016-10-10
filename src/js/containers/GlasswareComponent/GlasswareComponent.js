@@ -7,7 +7,7 @@ import { Row, Col } from 'react-bootstrap';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 import { TopMenu, GlasswareCanvasComponent, AccordionPane, ColorOptionPane, TextOptionPane, QuantitySubmitter, CompFontOptionPane, CompTextOptionPane } from '../../components';
 import { graphicEntryActions, colorEntryActions, fontEntryActions, glasswareActions } from '../../actions';
-import { MOBILE_LIMIT } from '../../constants/actionTypes';
+import { MOBILE_LIMIT, BASE_PATH } from '../../constants/actionTypes';
 
 class GlasswareComponent extends Component {
   

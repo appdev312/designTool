@@ -2,6 +2,7 @@ import './AccordionPane.scss';
 
 import React, { Component } from 'react';
 import { Thumbnail } from 'react-bootstrap';
+import { BASE_PATH } from '../../constants/actionTypes';
 
 export default class AccordionPlaceHolder extends Component {
 
@@ -11,7 +12,7 @@ export default class AccordionPlaceHolder extends Component {
           <Thumbnail 
             href="#" 
             className='design-thumbnail' 
-            src={require('./images/ajax-loader-blue.gif')}
+            src={BASE_PATH + '/images/ajax-loader-blue.gif'} 
           />
         </li>
     );

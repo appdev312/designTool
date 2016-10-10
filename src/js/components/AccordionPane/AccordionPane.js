@@ -70,7 +70,7 @@ export default class AccordionPane extends Component {
               href="#" 
               className={classnames('design-thumbnail', { 'selected': this.state.selectedThumbnail === thumb })}
               alt="No Image" 
-              src={"../../../" + thumb.url} 
+              src={thumb.url} 
               onClick={this.onClickThumbnail.bind(this, thumb)}
             />
           </li>

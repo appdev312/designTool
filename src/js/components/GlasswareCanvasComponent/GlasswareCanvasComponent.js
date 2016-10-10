@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button, Row, Col } from 'react-bootstrap';
 import { glasswareActions } from '../../actions';
-import { MOBILE_LIMIT } from '../../constants/actionTypes';
+import { MOBILE_LIMIT, BASE_PATH } from '../../constants/actionTypes';
 
 class GlasswareCanvasComponent extends Component {
 
@@ -55,8 +55,8 @@ class GlasswareCanvasComponent extends Component {
 
   render () {
     var { selectedThumbnail, selectedColor, enteredText, selectedFont } = this.props.glassware;
-    var clipartURL = "../../../images/glassware/graphics/layoutA/";
-    const backgroundImage = "../../../images/glassware/background/3421.jpg";
+    var clipartURL = BASE_PATH + "/images/glassware/graphics/layoutA/";
+    const backgroundImage = BASE_PATH + "/images/glassware/background/3421.jpg";
 
     // default color is black
     if (selectedColor == "") {
@@ -68,7 +68,7 @@ class GlasswareCanvasComponent extends Component {
       if (selectedColor.colorName) {
         clipartURL = clipartURL + selectedColor.colorName.replace(/\s+/g, '-').toLowerCase() + '/' + selectedThumbnail.graphicFullPath;
       } else {
-        clipartURL = "../../../" + selectedThumbnail.url;
+        clipartURL = selectedThumbnail.url;
       }
     }
 
