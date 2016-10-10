@@ -9,11 +9,10 @@ export default function configureStore(initialState) {
   let middleware = applyMiddleware();
   let enhancer;
 
+  let middlewares = [require('redux-immutable-state-invariant')(), thunk, api];
+  middleware = applyMiddleware(...middlewares);
+
   if (process.env.NODE_ENV !== 'production') {
-
-    let middlewares = [require('redux-immutable-state-invariant')(), thunk, api];
-    middleware = applyMiddleware(...middlewares);
-
     let getDebugSessionKey = function () {
       // By default we try to read the key from ?debug_session=<key> in the address bar
       const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);

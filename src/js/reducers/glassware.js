@@ -6,6 +6,7 @@ import undoable, { distinctState } from 'redux-undo'
 
 const initialState = {
 	buttonList: ['Design', 'Color', 'Text', 'Add Ons'],
+	mbButtonList: ['Design', 'Color', 'Text', 'Font', 'Add Ons', 'Quantity'],
 	topButton: 'Design',
 	selectedCategory: '',
 	selectedThumbnail: {},

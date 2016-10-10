@@ -18,29 +18,37 @@ class GlasswareCanvasComponent extends Component {
   constructor(props) {
     super(props);
 
+    // buttonList changes based on mobile/desktop view
+    let buttonList = (props.windowWidth >= MOBILE_LIMIT) ? props.glassware.buttonList : props.glassware.mbButtonList;
+    
     this.state = {
-      prevEnabled: props.glassware.buttonList.indexOf(props.glassware.topButton) === 0, 
-      fwdEnabled: props.glassware.buttonList.indexOf(props.glassware.topButton) === props.glassware.buttonList.length - 1,
+      buttonList: buttonList,
+      prevEnabled: buttonList.indexOf(props.glassware.topButton) === 0, 
+      fwdEnabled: buttonList.indexOf(props.glassware.topButton) === buttonList.length - 1,
       windowWidth: props.windowWidth
     };
   }
 
   componentWillReceiveProps(nextProps) {
+    // buttonList changes based on mobile/desktop view
+    let buttonList = (nextProps.windowWidth >= MOBILE_LIMIT) ? nextProps.glassware.buttonList : nextProps.glassware.mbButtonList;
+
     this.setState({
-      prevEnabled: nextProps.glassware.buttonList.indexOf(nextProps.glassware.topButton) === 0,
-      fwdEnabled: nextProps.glassware.buttonList.indexOf(nextProps.glassware.topButton) === nextProps.glassware.buttonList.length - 1,
+      buttonList: buttonList,
+      prevEnabled: buttonList.indexOf(nextProps.glassware.topButton) === 0,
+      fwdEnabled: buttonList.indexOf(nextProps.glassware.topButton) === buttonList.length - 1,
       windowWidth: nextProps.windowWidth
     });
   }
 
   onClickPrevButton() {
-    var buttonList = this.props.glassware.buttonList,
+    var buttonList = this.state.buttonList,
         topButton = this.props.glassware.topButton;
     this.props.selTopButton(buttonList[buttonList.indexOf(topButton) - 1]);
   }
 
   onClickFwdButton() {
-    var buttonList = this.props.glassware.buttonList,
+    var buttonList = this.state.buttonList,
         topButton = this.props.glassware.topButton;
     this.props.selTopButton(buttonList[buttonList.indexOf(topButton) + 1]);
   }

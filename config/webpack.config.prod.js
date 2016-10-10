@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // App files location
 const PATHS = {
+  htaccessPath: path.resolve(__dirname, '../src/.htaccess'),
   app: path.resolve(__dirname, '../src/js'),
   styles: path.resolve(__dirname, '../src/styles'),
   images: path.resolve(__dirname, '../src/images'),
@@ -22,6 +23,12 @@ const plugins = [
     }
   ]),
 */
+  // migrate .htaccess
+  new CopyWebpackPlugin([
+    {
+      from: PATHS.htaccessPath
+    }
+  ]),
   // Shared code
   new webpack.optimize.CommonsChunkPlugin('vendor', 'js/vendor.bundle.js'),
   // Avoid publishing files when compilation fails
@@ -69,6 +76,7 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
         loaders: ['react-hot', 'babel'],
         include: PATHS.app
       },

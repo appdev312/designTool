@@ -69,12 +69,13 @@ class GlasswareComponent extends Component {
   render () {
     const { topMenu, topMenuActions, apiData, glassware, canUndo, canRedo } = this.props;
     let isFetching = apiData.graphic.isFetching || apiData.color.isFetching || apiData.font.isFetching;
-
+    let buttonList = (this.state.windowWidth >= MOBILE_LIMIT) ? glassware.buttonList : glassware.mbButtonList;
+   
     return (
       <div className = "wrapper">
         {/* Top Menu with buttons */}
         <TopMenu
-          buttonList={glassware.buttonList}
+          buttonList={buttonList}
           selected={glassware.topButton}
           topMenuOptions={{
             layout: 'A', 
@@ -131,18 +132,28 @@ class GlasswareComponent extends Component {
                 this.state.windowWidth < MOBILE_LIMIT &&
                 <Col xs={12} sm={6} md={5}>
                   {/* Left panel with options for mobile view */}
-                  <CompFontOptionPane
-                    title="Font Options (Step 4 of 6)"
-                    fontList={['Arial', 'Avenida', 'Black Cherry', 'Block']}
-                    selectedFont={glassware.selectedFont}
-                    onChooseFont={this.props.selectFont}
-                  />
-                  <CompTextOptionPane
-                    title="Text Options (Step 3 of 6)"
-                    lineCount={3}
-                    value={glassware.enteredText}
-                    onChangeText={this.props.changeText}
-                  />
+                  {
+                    glassware.topButton ==='Text' && <CompTextOptionPane
+                      title="Text Options (Step 3 of 6)"
+                      lineCount={3}
+                      value={glassware.enteredText}
+                      onChangeText={this.props.changeText}
+                    />
+                  }
+                  {
+                    glassware.topButton ==='Font' && <CompFontOptionPane
+                      title="Font Options (Step 4 of 6)"
+                      fontList={['Arial', 'Avenida', 'Black Cherry', 'Block']}
+                      selectedFont={glassware.selectedFont}
+                      onChooseFont={this.props.selectFont}
+                    />
+                  }
+                  {
+                    glassware.topButton ==='Quantity' && <QuantitySubmitter
+                      title="Quantity (Step 6 of 6)"
+                      onSubmit={()=>{}}
+                    />
+                  }
                 </Col>
               }
               <Col xs={12} sm={6} md={7}>

@@ -6,9 +6,9 @@ import GlasswareComponent from './containers/GlasswareComponent/GlasswareCompone
 import NotFoundView from './views/NotFoundView';
 
 export default (
-	<Route path="/" component={App}>
-		<IndexRedirect to="labelType/glassware" />
-		<Route path="labelType/glassware" component={GlasswareComponent} />
+	<Route path="/designTool" component={App}>
+		<IndexRedirect to="glassware" />
+		<Route path="glassware" component={GlasswareComponent} />
 		<Route path="404" component={NotFoundView} />
 		<Redirect from="*" to="404" />
 	</Route>
