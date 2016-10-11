@@ -68,7 +68,7 @@ class GlasswareCanvasComponent extends Component {
       if (selectedColor.colorName) {
         clipartURL = clipartURL + selectedColor.colorName.replace(/\s+/g, '-').toLowerCase() + '/' + selectedThumbnail.graphicFullPath;
       } else {
-        clipartURL = selectedThumbnail.url;
+        clipartURL = clipartURL + 'black/' + selectedThumbnail.graphicFullPath;
       }
     }
 
