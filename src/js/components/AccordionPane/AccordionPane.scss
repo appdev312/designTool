@@ -1,23 +1,27 @@
 .accordion-pane {
 	.panel-title {
 		font-size: 12px;
-	}
 
-	a {
-		cursor: pointer;
+		a {
+			cursor: pointer;
+			display: block;
+			padding: 10px 15px;
+		}
 	}
 
 	.panel-heading {
+		padding: 0;
+
 		a {
-			padding-left: 12px;
+			padding-left: 25px;
 		}
 
 		a[aria-selected=true] {
-			background: url(./images/arrow-down.png) no-repeat left 0px top 2px;
+			background: url(./images/arrow-down.png) no-repeat left 10px top 11px;
 		}
 
 		a[aria-selected=false] {
-			background: url(./images/arrow-right.png) no-repeat left 0px top 2px;
+			background: url(./images/arrow-right.png) no-repeat left 10px top 11px;
 		}
 	}
 
