@@ -1,13 +1,14 @@
 # designTool
 React + redux, built on ES6
 
--- How to set up --
+[How to test]
 
 1. `npm start`
 
 
 
--- Build --
+
+[Build]
 
 1. Change .htaccess
 
