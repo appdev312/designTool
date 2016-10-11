@@ -55,6 +55,7 @@ class GlasswareCanvasComponent extends Component {
 
   render () {
     var { selectedThumbnail, selectedColor, enteredText, selectedFont } = this.props.glassware;
+    var lineTexts = [];
     var clipartURL = BASE_PATH + "/images/glassware/graphics/layoutA/";
     const backgroundImage = BASE_PATH + "/images/glassware/background/3421.jpg";
 
@@ -71,6 +72,11 @@ class GlasswareCanvasComponent extends Component {
         clipartURL = clipartURL + 'black/' + selectedThumbnail.graphicFullPath;
       }
     }
+
+    for (var i = 0; i < enteredText.length; i ++)
+      if (enteredText[i] !== '') {
+        lineTexts.push(enteredText[i]);
+      }
 
     return (
       <div className="product-container">
@@ -92,9 +98,9 @@ class GlasswareCanvasComponent extends Component {
               {
                 selectedThumbnail.url && (<img id="clipart" src={clipartURL} />)
               }
-              <p id="text-line1" style={{color: selectedColor.colorRGB, fontFamily: selectedFont}}>{enteredText[0]}</p>
-              <p id="text-line2" style={{color: selectedColor.colorRGB, fontFamily: selectedFont}}>{enteredText[1]}</p>
-              <p id="text-line3" style={{color: selectedColor.colorRGB, fontFamily: selectedFont}}>{enteredText[2]}</p>
+              <p id="text-line1" style={{color: selectedColor.colorRGB, fontFamily: selectedFont}}>{lineTexts[0]}</p>
+              <p id="text-line2" style={{color: selectedColor.colorRGB, fontFamily: selectedFont}}>{lineTexts[1]}</p>
+              <p id="text-line3" style={{color: selectedColor.colorRGB, fontFamily: selectedFont}}>{lineTexts[2]}</p>
             </div>
           </div>
           {
