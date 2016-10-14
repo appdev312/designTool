@@ -64,7 +64,7 @@ export default class AccordionPane extends Component {
   render_thumbnails(thumbs) {
     return thumbs.map((thumb) =>
       (
-        <LazyLoad key={thumb.id} once height={70} offset={[-5, 0]} placeholder={<AccordionPlaceHolder />}>
+        <LazyLoad key={thumb.id} once={true} height={70} offset={[-35, 0]} placeholder={<AccordionPlaceHolder />}>
           <li>
             <Thumbnail 
               href="#" 
