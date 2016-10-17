@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
-import { TopMenu, GlasswareCanvasComponent, AccordionPane, ColorOptionPane, TextOptionPane, QuantitySubmitter, CompFontOptionPane, CompTextOptionPane } from '../../components';
+import { TopMenu, GlasswareCanvasComponent, AccordionPane, CompColorOptionPane, ColorOptionPane, TextOptionPane, QuantitySubmitter, CompFontOptionPane, CompTextOptionPane } from '../../components';
 import { graphicEntryActions, colorEntryActions, fontEntryActions, glasswareActions } from '../../actions';
 import { MOBILE_LIMIT, BASE_PATH } from '../../constants/actionTypes';
 
@@ -132,6 +132,14 @@ class GlasswareComponent extends Component {
                 this.state.windowWidth < MOBILE_LIMIT &&
                 <Col xs={12} sm={6} md={5}>
                   {/* Left panel with options for mobile view */}
+                  {
+                    glassware.topButton ==='Color' && <CompColorOptionPane 
+                      title='Color Options (Step 2 of 6)'
+                      colorList={apiData.color.entries}
+                      selected={glassware.selectedColor}
+                      onChooseColor={this.props.selectColor}
+                    />
+                  }
                   {
                     glassware.topButton ==='Text' && <CompTextOptionPane
                       title="Text Options (Step 3 of 6)"

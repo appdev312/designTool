@@ -31,7 +31,7 @@ export default class CompFontOptionPane extends Component {
     let { title } = this.props;
 
     return (
-      <div className="text-option-pane">
+      <div className="mb-font-option-pane">
         <Panel header={title} bsStyle="info">
           <Panel header="Choose Your Font" bsStyle="info">
             <FormControl componentClass="select" placeholder="" onChange={this.onChooseFont.bind(this)} defaultValue={this.props.selectedFont}>

@@ -75,6 +75,7 @@
     "react-bootstrap": "0.30.3",
     "react-dom": "15.0.1",
     "react-lazyload": "2.1.5",
+    "react-motion": "0.4.5",
     "react-redux": "4.4.5",
     "react-router": "2.3.0",
     "redux": "3.5.2",

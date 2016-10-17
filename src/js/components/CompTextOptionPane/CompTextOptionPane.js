@@ -23,7 +23,7 @@ export default class CompTextOptionPane extends Component {
     let { title, value } = this.props;
 
     return (
-      <div className="text-option-pane">
+      <div className="mb-text-option-pane">
         <Panel header={title} bsStyle="info">
           <Panel header="Enter Your Text" bsStyle="info">
             <Form horizontal>

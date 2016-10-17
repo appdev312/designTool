@@ -7,3 +7,4 @@ export { default as GlasswareCanvasComponent } from './GlasswareCanvasComponent/
 export { default as NumberSpinner } from './NumberSpinner/NumberSpinner';
 export { default as CompFontOptionPane } from './CompFontOptionPane/CompFontOptionPane';
 export { default as CompTextOptionPane } from './CompTextOptionPane/CompTextOptionPane';
+export { default as CompColorOptionPane } from './CompColorOptionPane/CompColorOptionPane';

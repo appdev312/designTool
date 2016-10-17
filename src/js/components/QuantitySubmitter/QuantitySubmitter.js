@@ -29,7 +29,7 @@ export default class QuantitySubmitter extends Component {
     let { title, onSubmit } = this.props;
 
     return (
-      <div className="quantity-submitter">
+      <div className="mb-quantity-submitter">
         <Panel header={title} bsStyle="info">
           <div className="quantity-label">Quantity: </div>
           <div className="quantity-spinner">
