@@ -1,10 +1,10 @@
-import './AccordionPane.scss';
+import './GraphicPane.scss';
 
 import React, { Component } from 'react';
 import { Thumbnail } from 'react-bootstrap';
 import { BASE_PATH } from '../../constants/actionTypes';
 
-export default class AccordionPlaceHolder extends Component {
+export default class GraphicPlaceHolder extends Component {
 
   render () {
     return (

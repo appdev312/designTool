@@ -54,8 +54,8 @@ export default class CompColorOptionPane extends Component {
   onOutsideTap(e) {   
     const colorPane = ReactDOM.findDOMNode(this.colorPane);
     const tapButton = ReactDOM.findDOMNode(this.tapButton);
-
-    if (!colorPane.contains(e.target) && tapButton !== e.target) {
+    
+    if (colorPane && !colorPane.contains(e.target) && tapButton !== e.target) {
       this.setState({open: false});
     }
   }

@@ -1,13 +1,13 @@
-import './AccordionPane.scss';
+import './GraphicPane.scss';
 
 import React, { Component, PropTypes } from 'react';
 import { Accordion, Panel, Thumbnail } from 'react-bootstrap';
 import classnames from 'classnames';
 import LazyLoad from 'react-lazyload';
 import { forceCheck } from 'react-lazyload';
-import AccordionPlaceHolder from './AccordionPlaceHolder.js';
+import GraphicPlaceHolder from './GraphicPlaceHolder';
 
-export default class AccordionPane extends Component {
+export default class GraphicPane extends Component {
 
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -64,7 +64,7 @@ export default class AccordionPane extends Component {
   render_thumbnails(thumbs) {
     return thumbs.map((thumb) =>
       (
-        <LazyLoad key={thumb.id} once={true} height={70} offset={[-35, 0]} placeholder={<AccordionPlaceHolder />}>
+        <LazyLoad key={thumb.id} once={true} height={70} offset={[-35, 0]} placeholder={<GraphicPlaceHolder />}>
           <li>
             <Thumbnail 
               href="#" 
@@ -83,7 +83,7 @@ export default class AccordionPane extends Component {
     let { title, thumbsData, selectedCategory } = this.props;
 
     return (
-      <div className="accordion-pane">
+      <div className="graphic-pane">
         <Panel header={title} bsStyle="info">
           <Accordion onSelect={this.onSelectCategory.bind(this)} defaultActiveKey={selectedCategory}>
             {

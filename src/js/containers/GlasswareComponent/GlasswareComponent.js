@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
-import { TopMenu, GlasswareCanvasComponent, AccordionPane, CompColorOptionPane, ColorOptionPane, TextOptionPane, QuantitySubmitter, CompFontOptionPane, CompTextOptionPane } from '../../components';
+import { TopMenu, GlasswareCanvasComponent, GraphicPane, CompColorOptionPane, ColorOptionPane, TextOptionPane, QuantitySubmitter, CompFontOptionPane, CompTextOptionPane, CompGraphicPane } from '../../components';
 import { graphicEntryActions, colorEntryActions, fontEntryActions, glasswareActions } from '../../actions';
 import { MOBILE_LIMIT, BASE_PATH } from '../../constants/actionTypes';
 
@@ -99,7 +99,7 @@ class GlasswareComponent extends Component {
                 <Col xs={12} sm={6} md={5}>
                   {/* Left panel with options */}
                   {
-                    glassware.topButton === 'Design' && <AccordionPane
+                    glassware.topButton === 'Design' && <GraphicPane
                       title="Design Browser (Step 1 of 4)"
                       thumbsData={apiData.graphic.entries}
                       onClickThumbnail={this.props.selectThumbnail}
@@ -132,6 +132,15 @@ class GlasswareComponent extends Component {
                 this.state.windowWidth < MOBILE_LIMIT &&
                 <Col xs={12} sm={6} md={5}>
                   {/* Left panel with options for mobile view */}
+                  {
+                    glassware.topButton === 'Design' && <CompGraphicPane
+                      title="Design Browser (Step 1 of 6)"
+                      thumbsData={apiData.graphic.entries}
+                      onClickThumbnail={this.props.selectThumbnail}
+                      selectedCategory={glassware.selectedCategory}
+                      selectedThumbnail={glassware.selectedThumbnail}
+                    />
+                  }
                   {
                     glassware.topButton ==='Color' && <CompColorOptionPane 
                       title='Color Options (Step 2 of 6)'

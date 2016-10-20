@@ -1,0 +1,65 @@
+.mb-graphic-option-pane {
+	.panel-body {
+		position: relative;
+
+		.btn-tap {
+			background-color: #03bff4;
+			color: white;
+			width: 100%;
+		}
+
+		.choose-graphic-panel {
+			position: absolute;
+			left: 0;
+			overflow-x: hidden;
+			background-color: #fff !important;
+			background-image: none !important;
+			z-index: 999;
+			border: 1px solid #dddddd;
+			border-radius: 4px;
+			margin: 2px 15px;
+
+			.category-buttons {
+				background-color: #d9edf7;
+				padding: 5px;
+
+				button {
+					margin: 2px 2px;
+				}
+
+				.selected {
+					background-color: #2196F3;
+					border-color: #2196F3;
+				}
+			}
+
+			.category-thumbs {
+				height: 200px;
+				overflow-y: scroll;
+
+				ol {
+					list-style-type: none !important;
+				    margin: 0;
+				    padding: 0;
+
+				    li {
+						height: 78px;
+						width: 78px;
+						margin-left: 2px;
+						margin-right: 2px;
+						float: left;
+
+						.design-thumbnail {
+							width: 70px;
+							height: 70px;
+						}
+
+						.selected {
+							border-color: #f00;
+						}
+				    }
+				}
+			}
+		}
+	}
+}
