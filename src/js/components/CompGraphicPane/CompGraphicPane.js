@@ -58,8 +58,8 @@ export default class CompGraphicPane extends Component {
   render_thumbnails(thumbs) {
     return thumbs.map((thumb) =>
       (
-        <LazyLoad key={thumb.id} once={true} height={70} offset={[-35, 0]} placeholder={<GraphicPlaceHolder />}>
-          <li>
+        <li key={thumb.id}>
+          <LazyLoad once={true} height={70} offset={[-15, 0]} placeholder={<GraphicPlaceHolder />}>
             <Thumbnail 
               href="#" 
               className={classnames('design-thumbnail', { 'selected': this.state.selectedThumbnail === thumb })}
@@ -67,8 +67,8 @@ export default class CompGraphicPane extends Component {
               src={thumb.url} 
               onClick={this.onClickThumbnail.bind(this, thumb)}
             />
-          </li>
-        </LazyLoad>
+          </LazyLoad>
+        </li>
       )
     );
   }

@@ -8,13 +8,11 @@ export default class GraphicPlaceHolder extends Component {
 
   render () {
     return (
-        <li>
-          <Thumbnail 
-            href="#" 
-            className='design-thumbnail' 
-            src={BASE_PATH + '/images/ajax-loader-blue.gif'} 
-          />
-        </li>
+        <Thumbnail 
+          href="#" 
+          className='design-thumbnail' 
+          src={BASE_PATH + '/images/ajax-loader-blue.gif'} 
+        />
     );
   }
 }
