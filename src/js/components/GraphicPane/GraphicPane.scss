@@ -10,8 +10,6 @@
 	}
 
 	.panel-heading {
-		padding: 0;
-
 		a {
 			padding-left: 25px;
 		}
@@ -22,6 +20,12 @@
 
 		a[aria-selected=false] {
 			background: url(./images/arrow-right.png) no-repeat left 10px top 11px;
+		}
+	}
+
+	.panel-body {
+		.panel-heading {
+			padding: 0;
 		}
 	}
 
