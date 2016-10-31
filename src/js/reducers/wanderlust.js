@@ -13,7 +13,7 @@ const initialState = {
 	selectedDesign: {},
 	selectedFont: '',
 	enteredText: ['', '', '', ''],
-	selectedFontColor: ''
+	selectedFontColor: {}
 };
 
 function wanderlust(state = initialState, action) {

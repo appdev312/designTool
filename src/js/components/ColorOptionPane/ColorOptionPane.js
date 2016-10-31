@@ -10,7 +10,8 @@ export default class ColorOptionPane extends Component {
     title: PropTypes.string,
     colorList: PropTypes.array.isRequired, 
     selected: PropTypes.object,
-    onChooseColor: PropTypes.func
+    onChooseColor: PropTypes.func,
+    subtitle: PropTypes.string,
   };
 
   constructor(props, context) {
@@ -44,12 +45,15 @@ export default class ColorOptionPane extends Component {
   }
 
   render () {
-    let { title } = this.props;
+    let { title, subtitle } = this.props;
+    if (typeof subtitle === "undefined") {
+      subtitle = "Choose a Color:";
+    }
 
     return (
       <div className="color-option-pane">
         <Panel header={title} bsStyle="info">
-          <Panel header="Choose a Color:" bsStyle="info" className="choose-color-panel">
+          <Panel header={subtitle} bsStyle="info" className="choose-color-panel">
             {this.render_color_thumbnails()}
           </Panel>
         </Panel>

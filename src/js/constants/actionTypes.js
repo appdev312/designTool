@@ -20,6 +20,11 @@ export const FONT_ENTRY_REQUEST				= 'FONT_ENTRY_REQUEST';
 export const FONT_ENTRY_SUCCESS				= 'FONT_ENTRY_SUCCESS';
 export const FONT_ENTRY_FAILURE				= 'FONT_ENTRY_FAILURE';
 
+// http://www.fashioncraft.com/utilities/getPersonalizationData.php?itemType=X&entryType=pattern
+export const PATTERN_ENTRY_REQUEST			= 'PATTERN_ENTRY_REQUEST';
+export const PATTERN_ENTRY_SUCCESS			= 'PATTERN_ENTRY_SUCCESS';
+export const PATTERN_ENTRY_FAILURE			= 'PATTERN_ENTRY_FAILURE';
+
 // Glassware constants
 export const GLASSWARE_SEL_TOP_BUTTON		= 'GLASSWARE_SEL_TOP_BUTTON';
 export const GLASSWARE_SEL_COLOR			= 'GLASSWARE_SEL_COLOR';

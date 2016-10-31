@@ -118,7 +118,7 @@ class GlasswareComponent extends Component {
                   {
                     glassware.topButton === 'Text' && <TextOptionPane
                       title="Text Options (Step 3 of 4)"
-                      fontList={['Arial', 'Avenida', 'Black Cherry', 'Block']}
+                      fontList={apiData.font.entries}
                       selectedFont={glassware.selectedFont}
                       lineCount={3}
                       value={glassware.enteredText}

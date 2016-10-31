@@ -22,7 +22,7 @@ const initialState = {
 		itemType: '',
 		isFetching: false,		
 		error: '',
-		entries: {}
+		entries: []
 	}
 };
 
@@ -128,7 +128,7 @@ export default function apiData(state = initialState, action) {
 				font: {
 					...state.font,
 					isFetching: false,
-					entries: response.fontFaces
+					entries: map(response.fontFaces, ct=>ct[0])
 				}
 			});
 		case actionTypes.FONT_ENTRY_FAILURE: 
