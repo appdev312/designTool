@@ -6,7 +6,10 @@ import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
-import { TopMenu, GlasswareCanvasComponent, GraphicPane, CompColorOptionPane, ColorOptionPane, TextOptionPane } from '../../components';
+import { TopMenu, GlasswareCanvasComponent, GraphicPane, 
+    CompColorOptionPane, ColorOptionPane, TextOptionPane, PatternPane,
+    CompGraphicPane
+} from '../../components';
 import { graphicEntryActions, colorEntryActions, fontEntryActions, patternEntryActions, wanderlustActions } from '../../actions';
 import { MOBILE_LIMIT, BASE_PATH } from '../../constants/actionTypes';
 
@@ -25,7 +28,9 @@ class WanderlustComponent extends Component {
     selectFont: PropTypes.func.isRequired,
     changeText: PropTypes.func.isRequired,
     selectFontColor: PropTypes.func.isRequired,
-
+    selectThumbnail: PropTypes.func.isRequired,
+    selectPattern: PropTypes.func.isRequired,
+    
     canUndo: PropTypes.bool.isRequired,
     canRedo: PropTypes.bool.isRequired,
     onUndo: PropTypes.func.isRequired,
@@ -85,9 +90,11 @@ class WanderlustComponent extends Component {
             layout: 'A', 
             backgroundColor: wanderlust.selectedColor.colorName ? wanderlust.selectedColor.colorName:'', 
             borderColor: wanderlust.selectedColor.colorName ? wanderlust.selectedColor.colorName:'', 
-            design: wanderlust.selectedDesign.name,
+            design: wanderlust.selectedThumbnail.name,
             canUndo: canUndo,
-            canRedo: canRedo
+            canRedo: canRedo,
+            patternColor: "White",
+            pattern: wanderlust.selectedPattern.patternName
           }}
           onGoBack={()=>this.props.onUndo}
           onGoForward={()=>this.props.onRedo}
@@ -112,6 +119,23 @@ class WanderlustComponent extends Component {
                     />
                   }
                   {
+                    wanderlust.topButton ==='Pattern' && <PatternPane 
+                      title='Pattern Browser (Step 2 of 4)'
+                      patternList={apiData.pattern.entries.patterns}
+                      selected={wanderlust.selectedPattern}
+                      onChoosePattern={this.props.selectPattern}
+                    />
+                  }
+                  {
+                    wanderlust.topButton === 'Design' && <GraphicPane
+                      title="Design Browser (Step 3 of 4)"
+                      thumbsData={apiData.graphic.entries}
+                      onClickThumbnail={this.props.selectThumbnail}
+                      selectedCategory={wanderlust.selectedCategory}
+                      selectedThumbnail={wanderlust.selectedThumbnail}
+                    />
+                  }
+                  {
                     wanderlust.topButton === 'Text' && <TextOptionPane
                       title="Text Options (Step 4 of 4)"
                       fontList={apiData.font.entries}
@@ -123,6 +147,30 @@ class WanderlustComponent extends Component {
                       colorList={[{colorName: "White", colorRGB: "rgb(255,255,255)"}, {colorName: "Black", colorRGB: "rgb(0,0,0)"}]}
                       selectedFontColor={wanderlust.selectedFontColor}
                       onChooseFontColor={this.props.selectFontColor}
+                    />
+                  }
+                </Col>
+              }
+              { 
+                this.state.windowWidth < MOBILE_LIMIT &&
+                <Col xs={12} sm={6} md={5}>
+                  {/* Left panel with options for mobile view */}
+                  {
+                    wanderlust.topButton ==='Color' && <CompColorOptionPane 
+                      title='Color Options (Step 1 of 4)'
+                      subtitle='Tap To Choose Your Background Color'
+                      colorList={apiData.color.entries}
+                      selected={wanderlust.selectedColor}
+                      onChooseColor={this.props.selectColor}
+                    />
+                  }
+                  {
+                    wanderlust.topButton === 'Design' && <CompGraphicPane
+                      title="Design Browser (Step 3 of 4)"
+                      thumbsData={apiData.graphic.entries}
+                      onClickThumbnail={this.props.selectThumbnail}
+                      selectedCategory={wanderlust.selectedCategory}
+                      selectedThumbnail={wanderlust.selectedThumbnail}
                     />
                   }
                 </Col>
@@ -157,6 +205,8 @@ function mapDispatchToProps(dispatch) {
     selectFont: bindActionCreators(wanderlustActions.selectFont, dispatch),
     changeText: bindActionCreators(wanderlustActions.changeText, dispatch),
     selectFontColor: bindActionCreators(wanderlustActions.selectFontColor, dispatch),
+    selectThumbnail: bindActionCreators(wanderlustActions.selectThumbnail, dispatch),
+    selectPattern: bindActionCreators(wanderlustActions.selectPattern, dispatch),
 
     onUndo: bindActionCreators(UndoActionCreators.undo, dispatch),
     onRedo: bindActionCreators(UndoActionCreators.redo, dispatch)

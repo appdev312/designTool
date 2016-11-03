@@ -28,11 +28,12 @@ export function selectPattern(selectedPattern) {
 	}
 }
 
-export function selectDesign(selectedDesign) {
+export function selectThumbnail(selectedCategory, selectedThumbnail) {
 	return {
 		type: WANDERLUST_SEL_GRAPHIC,
 		itemType: 'wanderlust',
-		selectedDesign
+		selectedCategory,
+		selectedThumbnail
 	}
 }
 

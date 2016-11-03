@@ -13,7 +13,7 @@ const initialState = {
 
 	graphic: {
 		itemType: '',
-		isFetching: false,		
+		isFetching: false,
 		error: '',
 		entries: []
 	},
@@ -23,6 +23,13 @@ const initialState = {
 		isFetching: false,		
 		error: '',
 		entries: []
+	},
+
+	pattern: {
+		itemType: '',
+		isFetching: false,
+		error: '',
+		entries: {}
 	}
 };
 
@@ -32,7 +39,7 @@ function formatGraphicData(response) {
 	var index = 0;
 
 	each(response, function(val) {
-		if (typeof val.graphicCategory === 'undefined') {
+		if (typeof val.graphicCategory === 'undefined' || typeof val.graphicFullPath === 'undefined') {
 			return;
 		}
 
@@ -135,6 +142,33 @@ export default function apiData(state = initialState, action) {
 			return merge({}, state, {
 				font: {
 					...state.font,
+					isFetching: false,
+					error: error
+				}
+			});
+
+		// PATTERN
+		case actionTypes.PATTERN_ENTRY_REQUEST: 
+			return merge({}, state, {
+				pattern: {
+					itemType: itemType,
+					isFetching: true,
+					error: '',
+					entries: {}
+				}
+			});
+		case actionTypes.PATTERN_ENTRY_SUCCESS: 
+			return merge({}, state, {
+				pattern: {
+					...state.pattern,
+					isFetching: false,
+					entries: response
+				}
+			});
+		case actionTypes.PATTERN_ENTRY_FAILURE: 
+			return merge({}, state, {
+				pattern: {
+					...state.pattern,
 					isFetching: false,
 					error: error
 				}

@@ -8,7 +8,7 @@ function fetchPatternEntries(itemType) {
 		[CALL_API]: {
 			types: [ PATTERN_ENTRY_REQUEST, PATTERN_ENTRY_SUCCESS, PATTERN_ENTRY_FAILURE ],
 			itemType: itemType,
-			endpoint: `itemType=${itemType}&entryType=pattern`
+			endpoint: `itemType=${itemType}&entryType=patterns`
 		}
 	};
 }

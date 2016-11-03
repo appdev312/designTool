@@ -12,6 +12,7 @@ export default class CompColorOptionPane extends Component {
 
   static propTypes = {
     title: PropTypes.string,
+    subtitle: PropTypes.string,
     colorList: PropTypes.array.isRequired, 
     selected: PropTypes.object,
     onChooseColor: PropTypes.func
@@ -76,12 +77,15 @@ export default class CompColorOptionPane extends Component {
   }
 
   render () {
-    let { title } = this.props;
+    let { title, subtitle } = this.props;
+    if (typeof subtitle === 'undefined') {
+      subtitle = 'Tap To Choose a Color:';
+    }
 
     return (
       <div className="mb-color-option-pane">
         <Panel header={title} bsStyle="info">
-          <Button bsStyle="tap" onClick={this.onClickTap.bind(this)} ref={(ref)=>this.tapButton=ref}>Tap To Choose a Color:</Button>
+          <Button bsStyle="tap" onClick={this.onClickTap.bind(this)} ref={(ref)=>this.tapButton=ref}>{subtitle}</Button>
           <Motion defaultStyle={{x: -700}} style={{x: spring(this.state.open ? 0 : -700)}}>
             {({x}) =>
               <div className="choose-color-panel" style={{

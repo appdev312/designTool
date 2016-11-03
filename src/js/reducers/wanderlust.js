@@ -10,7 +10,8 @@ const initialState = {
 	topButton: 'Color',
 	selectedColor: {},
 	selectedPattern: {}, 
-	selectedDesign: {},
+	selectedCategory: 'wanderlust',
+	selectedThumbnail: {},
 	selectedFont: '',
 	enteredText: ['', '', '', ''],
 	selectedFontColor: {}
@@ -40,7 +41,7 @@ function wanderlust(state = initialState, action) {
 		case actionTypes.WANDERLUST_SEL_GRAPHIC: 
 			return {
 				...state,
-				selectedDesign: action.selectedDesign
+				selectedThumbnail: action.selectedThumbnail
 			};
 		case actionTypes.WANDERLUST_SEL_FONT: 
 			return {
