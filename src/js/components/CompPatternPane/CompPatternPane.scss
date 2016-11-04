@@ -1,0 +1,78 @@
+.mb-pattern-option-pane {
+	.panel-body {
+		position: relative;
+
+		.btn-tap {
+			background-color: #03bff4;
+			color: white;
+			width: 100%;
+		}
+
+		.choose-pattern-panel {
+			position: absolute;
+			left: 0;
+			right: 0;
+			overflow-x: hidden;
+			background-color: #fff !important;
+			background-image: none !important;
+			z-index: 999;
+			border: 1px solid #dddddd;
+			border-radius: 4px;
+			margin: 2px 15px;
+
+			.category-thumbs {
+				height: 200px;
+				overflow-y: scroll;
+
+				ol {
+					list-style-type: none !important;
+				    margin: 0;
+				    padding: 0;
+
+				    li {
+						height: 70px;
+						width: 70px;
+						margin: 2px;
+						float: left;
+
+						background: #cedce7 !important;
+					    background: -moz-linear-gradient(-45deg, #cedce7 50%, #596a72 100%) !important;
+					    background: -webkit-gradient(linear, left top, right bottom, color-stop(50%,#cedce7), color-stop(100%,#596a72)) !important;
+					    background: -webkit-linear-gradient(-45deg, #cedce7 50%,#596a72 100%) !important;
+					    background: -o-linear-gradient(-45deg, #cedce7 50%,#596a72 100%) !important;
+					    background: -ms-linear-gradient(-45deg, #cedce7 50%,#596a72 100%) !important;
+					    background: linear-gradient(135deg, #cedce7 50%,#596a72 100%) !important;
+					    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72',GradientType=1 ) !important;
+
+					    border-radius: 4px;
+						-webkit-transition: border .2s ease-in-out;
+						-o-transition: border .2s ease-in-out;
+						transition: border .2s ease-in-out;
+
+						a.pattern-thumbnail {
+							width: 70px;
+							height: 70px;
+							background-position: 5px 5px;
+							background-repeat: no-repeat;
+							background-size: 60px 60px;
+							display: block;
+							border: 1px solid #ddd;
+							border-radius: 4px;
+							-webkit-transition: border .2s ease-in-out;
+							-o-transition: border .2s ease-in-out;
+							transition: border .2s ease-in-out;
+						}
+
+						a.pattern-thumbnail.active, a.pattern-thumbnail:focus, a.pattern-thumbnail:hover {
+							border-color: #337ab7;
+						}
+
+						a.pattern-thumbnail.selected {
+							border-color: #f00;
+						}
+				    }
+				}
+			}
+		}
+	}
+}

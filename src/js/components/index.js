@@ -11,3 +11,4 @@ export { default as CompFontOptionPane } from './CompFontOptionPane/CompFontOpti
 export { default as CompTextOptionPane } from './CompTextOptionPane/CompTextOptionPane';
 export { default as CompColorOptionPane } from './CompColorOptionPane/CompColorOptionPane';
 export { default as CompGraphicPane } from './CompGraphicPane/CompGraphicPane';
+export { default as CompPatternPane } from './CompPatternPane/CompPatternPane';

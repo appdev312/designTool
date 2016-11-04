@@ -8,7 +8,7 @@ import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
 import { TopMenu, GlasswareCanvasComponent, GraphicPane, 
     CompColorOptionPane, ColorOptionPane, TextOptionPane, PatternPane,
-    CompGraphicPane
+    CompGraphicPane, CompPatternPane
 } from '../../components';
 import { graphicEntryActions, colorEntryActions, fontEntryActions, patternEntryActions, wanderlustActions } from '../../actions';
 import { MOBILE_LIMIT, BASE_PATH } from '../../constants/actionTypes';
@@ -162,6 +162,14 @@ class WanderlustComponent extends Component {
                       colorList={apiData.color.entries}
                       selected={wanderlust.selectedColor}
                       onChooseColor={this.props.selectColor}
+                    />
+                  }
+                  {
+                    wanderlust.topButton ==='Pattern' && <CompPatternPane 
+                      title='Pattern Browser (Step 2 of 4)'
+                      patternList={apiData.pattern.entries.patterns}
+                      selected={wanderlust.selectedPattern}
+                      onChoosePattern={this.props.selectPattern}
                     />
                   }
                   {

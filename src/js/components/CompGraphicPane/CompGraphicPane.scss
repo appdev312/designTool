@@ -11,13 +11,14 @@
 		.choose-graphic-panel {
 			position: absolute;
 			left: 0;
+			right: 0;
+			margin: 2px 15px;
 			overflow-x: hidden;
 			background-color: #fff !important;
 			background-image: none !important;
 			z-index: 999;
 			border: 1px solid #dddddd;
 			border-radius: 4px;
-			margin: 2px 15px;
 
 			.category-buttons {
 				background-color: #d9edf7;
@@ -45,9 +46,9 @@
 				    li {
 						height: 78px;
 						width: 78px;
-						margin-left: 2px;
-						margin-right: 2px;
+						margin: 2px;
 						float: left;
+						padding: 4px;
 
 						.design-thumbnail {
 							width: 70px;
@@ -56,6 +57,10 @@
 
 						.selected {
 							border-color: #f00;
+						}
+
+						.thumbnail {
+							margin-bottom: 0;
 						}
 				    }
 				}
