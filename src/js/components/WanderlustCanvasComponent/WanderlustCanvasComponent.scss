@@ -1,0 +1,86 @@
+.wanderlust-product-container {
+	background-image: url('../GlasswareCanvasComponent/images/grid-pattern.png');
+    border: 1px solid #ccc;
+    position: relative;
+    border-radius: 6px;
+    height: 100%;
+
+    .visible-area {
+    	margin: 20px auto 20px auto;
+
+	    .canvas-wrapper {
+	    	position: relative;
+			padding: 20px;
+			border: dashed 1px #f00;
+			background-color: #fff;
+			border-radius: 12px;
+			box-sizing: border-box;
+
+			.background-layer {
+				position: absolute;
+				left: 20px;
+				top: 20px;
+			}
+
+			.craft-layer {
+				position: relative;
+				left: 0px;
+				top: 0px;
+				text-align: center;
+				vertical-align: middle;
+				padding: 0px;
+
+				img#pattern {
+					position: absolute;
+					left: 0px;
+					top: -22px;
+					width: 208px;
+					height: 203px;
+				}
+
+				img#clipart {
+					position: absolute;
+					left: 30px;
+					top: 23px;
+					width: 120px;
+					height: 72px;
+				}
+
+				p {
+					width: 100%;
+					font-size: 12px;
+					position: absolute;
+				}
+
+				#text-line1 {
+					top: 98px;
+				}
+
+				#text-line2 {
+					top: 118px;
+				}
+			}
+	    }
+
+	    .button-wrapper {
+	    	margin-top: 10px;
+	    	margin-bottom: 10px;
+
+	    	.prev-button {
+	    		float: left;
+	    	}
+
+	    	.next-button {
+	    		float: right;
+	    	}
+	    }
+
+		.button-wrapper:after {
+			content: " ";
+			visibility: hidden;
+			display: block;
+			height: 0;
+			clear: both;
+		}
+	}
+}

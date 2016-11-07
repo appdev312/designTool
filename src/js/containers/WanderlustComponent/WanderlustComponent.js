@@ -6,9 +6,9 @@ import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
-import { TopMenu, GlasswareCanvasComponent, GraphicPane, 
+import { TopMenu, WanderlustCanvasComponent, GraphicPane, 
     CompColorOptionPane, ColorOptionPane, TextOptionPane, PatternPane,
-    CompGraphicPane, CompPatternPane
+    CompGraphicPane, CompPatternPane, CompFontOptionPane, CompTextOptionPane, CompTextColorPane
 } from '../../components';
 import { graphicEntryActions, colorEntryActions, fontEntryActions, patternEntryActions, wanderlustActions } from '../../actions';
 import { MOBILE_LIMIT, BASE_PATH } from '../../constants/actionTypes';
@@ -55,6 +55,12 @@ class WanderlustComponent extends Component {
 
   handleResize(e) {
     this.setState({windowWidth: window.innerWidth});
+
+    // In case mobile tab button does not exist in desktop tab button list
+    let buttonList = (window.innerWidth >= MOBILE_LIMIT) ? this.props.wanderlust.buttonList : this.props.wanderlust.mbButtonList;
+    if (buttonList.indexOf(this.props.wanderlust.topButton) < 0) {
+      this.props.selTopButton(buttonList[0]);
+    }
   }
 
   componentDidMount() {
@@ -140,7 +146,7 @@ class WanderlustComponent extends Component {
                       title="Text Options (Step 4 of 4)"
                       fontList={apiData.font.entries}
                       selectedFont={wanderlust.selectedFont}
-                      lineCount={3}
+                      lineCount={2}
                       value={wanderlust.enteredText}
                       onChooseFont={this.props.selectFont}
                       onChangeText={this.props.changeText}
@@ -157,7 +163,7 @@ class WanderlustComponent extends Component {
                   {/* Left panel with options for mobile view */}
                   {
                     wanderlust.topButton ==='Color' && <CompColorOptionPane 
-                      title='Color Options (Step 1 of 4)'
+                      title='Color Options (Step 1 of 6)'
                       subtitle='Tap To Choose Your Background Color'
                       colorList={apiData.color.entries}
                       selected={wanderlust.selectedColor}
@@ -166,7 +172,7 @@ class WanderlustComponent extends Component {
                   }
                   {
                     wanderlust.topButton ==='Pattern' && <CompPatternPane 
-                      title='Pattern Browser (Step 2 of 4)'
+                      title='Pattern Browser (Step 2 of 6)'
                       patternList={apiData.pattern.entries.patterns}
                       selected={wanderlust.selectedPattern}
                       onChoosePattern={this.props.selectPattern}
@@ -174,15 +180,43 @@ class WanderlustComponent extends Component {
                   }
                   {
                     wanderlust.topButton === 'Design' && <CompGraphicPane
-                      title="Design Browser (Step 3 of 4)"
+                      title="Design Browser (Step 3 of 6)"
                       thumbsData={apiData.graphic.entries}
                       onClickThumbnail={this.props.selectThumbnail}
                       selectedCategory={wanderlust.selectedCategory}
                       selectedThumbnail={wanderlust.selectedThumbnail}
                     />
                   }
+                  {
+                    wanderlust.topButton ==='Font' && <CompFontOptionPane
+                      title="Font Options (Step 4 of 6)"
+                      fontList={apiData.font.entries}
+                      selectedFont={wanderlust.selectedFont}
+                      onChooseFont={this.props.selectFont}
+                    />
+                  }
+                  {
+                    wanderlust.topButton ==='Text' && <CompTextOptionPane
+                      title="Text Options (Step 5 of 6)"
+                      lineCount={2}
+                      value={wanderlust.enteredText}
+                      onChangeText={this.props.changeText}
+                    />
+                  }
+                  {
+                    wanderlust.topButton ==='FontColor' && <CompTextColorPane
+                      title="Font Color Options (Step 6 of 6)"
+                      colorList={[{colorName: "White", colorRGB: "rgb(255,255,255)"}, {colorName: "Black", colorRGB: "rgb(0,0,0)"}]}
+                      selectedFontColor={wanderlust.selectedFontColor}
+                      onChooseFontColor={this.props.selectFontColor}
+                    />
+                  }
                 </Col>
               }
+              <Col xs={12} sm={6} md={7}>
+                {/* Drawing canvas */}
+                <WanderlustCanvasComponent windowWidth={this.state.windowWidth} />
+              </Col>
             </Row>
           </div>
         }

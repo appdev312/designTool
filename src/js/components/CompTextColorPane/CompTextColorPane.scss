@@ -1,0 +1,38 @@
+.mb-textcolor-option-pane {
+	.panel-body {
+		position: relative;
+
+		.btn-tap {
+			background-color: #03bff4;
+			color: white;
+			width: 100%;
+		}
+
+		.choose-color-panel {
+			position: absolute;
+			left: 0;
+			right: 0;
+			overflow-x: hidden;
+			overflow-y: scroll;
+			background-color: #fff !important;
+			background-image: none !important;
+			z-index: 999;
+			border: 1px solid #dddddd;
+			border-radius: 4px;
+			height: 200px;
+			margin: 2px 15px;
+
+			a.color-thumbnail {
+				float: left;
+				margin: 5px;
+				width: 40px;
+				height: 40px;
+				border: solid 1px #000;
+			}
+
+			a.selected {
+				border: 2px solid #f00 !important;
+			}
+		}
+	}
+}

@@ -46,6 +46,12 @@ class GlasswareComponent extends Component {
 
   handleResize(e) {
     this.setState({windowWidth: window.innerWidth});
+
+    // In case mobile tab button does not exist in desktop tab button list
+    let buttonList = (window.innerWidth >= MOBILE_LIMIT) ? this.props.glassware.buttonList : this.props.glassware.mbButtonList;
+    if (buttonList.indexOf(this.props.glassware.topButton) < 0) {
+      this.props.selTopButton(buttonList[0]);
+    }
   }
 
   componentDidMount() {
